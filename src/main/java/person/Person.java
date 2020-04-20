@@ -37,19 +37,4 @@ public class Person {
     private String profession;
 
 
-    private createPerson() {
-        Person person = new Person.builder()
-                .name()
-                .dob()
-                .gender()
-                .addres()
-                .email()
-                .profession()
-                .build();
-        return person;
-    }
-
-
-
-
 }
