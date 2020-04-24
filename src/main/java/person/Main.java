@@ -16,7 +16,7 @@ public class Main {
 
 
 
-    private static Faker faker = new Faker (new Locale("en"));
+    private static Faker faker = new Faker (new Locale("hu"));
 
     private static Person randomPerson() {
         Person person = Person.builder()
@@ -42,7 +42,7 @@ public class Main {
         EntityManagerFactory entmanfac = Persistence.createEntityManagerFactory("jpa-example"); // Ennek a beállításai a resources csomagban elhelyezett persistence.xml-ben vannak.
         EntityManager em = entmanfac.createEntityManager();
 
-        int howManyPersons = 1000;
+        int howManyPersons = 10;
 
         for (int i = 0; i < howManyPersons; i++) {
 
