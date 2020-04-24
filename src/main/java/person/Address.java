@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @Builder
-@Embeddable
+@Embeddable //beágyazható lesz egy @Embedded osztályba,ami a Person osztály
 public class Address {
 
     @Column(nullable = false)

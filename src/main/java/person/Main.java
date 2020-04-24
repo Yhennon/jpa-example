@@ -1,14 +1,11 @@
 package person;
 
-import java.time.LocalDate;
-import java.time.Year;
-import java.util.Locale;
-import java.util.Date;
-import com.github.javafaker.Faker;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
-import guice.PersistenceModule;
+import java.time.ZoneId;
+import java.util.Locale;
+
+import com.github.javafaker.Faker;
+
 
 
 import javax.persistence.EntityManager;
@@ -22,11 +19,19 @@ public class Main {
     private static Faker faker = new Faker (new Locale("en"));
 
     private static Person randomPerson() {
-        Person person = new Person.builder()
-                .name(faker.name().username())
-                .dob(faker.date().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
-                .gender(faker.options().option(Person.Gender))
-                .addres(faker.address())
+        Person person = Person.builder()
+                .name(faker.name().nameWithMiddle())
+                .dob(faker.date().birthday().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())
+                .gender(faker.options().option(Person.Gender.class))
+                .address(
+                        Address.builder()
+                        .country(faker.address().country())
+                        .state(faker.address().state())
+                        .city(faker.address().city())
+                        .streetAddress(faker.address().streetAddress())
+                        .zip(faker.address().zipCode())
+                                .build()
+                        )
                 .email(faker.internet().emailAddress())
                 .profession(faker.company().profession())
                 .build();
@@ -34,8 +39,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        //Injector injector = Guice.createInjector(new PersistenceModule("test"));
-        EntityManagerFactory entmanfac = Persistence.createEntityManagerFactory("jpa-example");
+        EntityManagerFactory entmanfac = Persistence.createEntityManagerFactory("jpa-example"); // Ennek a beállításai a resources csomagban elhelyezett persistence.xml-ben vannak.
         EntityManager em = entmanfac.createEntityManager();
 
         for (int i = 0; i < 10; i++) {
