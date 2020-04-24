@@ -42,7 +42,9 @@ public class Main {
         EntityManagerFactory entmanfac = Persistence.createEntityManagerFactory("jpa-example"); // Ennek a beállításai a resources csomagban elhelyezett persistence.xml-ben vannak.
         EntityManager em = entmanfac.createEntityManager();
 
-        for (int i = 0; i < 10; i++) {
+        int howManyPersons = 1000;
+
+        for (int i = 0; i < howManyPersons; i++) {
 
             Person person = randomPerson();
             em.getTransaction().begin();
